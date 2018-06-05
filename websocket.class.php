@@ -26,9 +26,11 @@ class WebSocket{
       $this->say("Debugging on\n");
     }
 
+    $write = array();
+    $except = array();
     while(true){
       $changed = $this->sockets;
-      socket_select($changed,$write=NULL,$except=NULL,NULL);
+      socket_select($changed,$write,$except,NULL);
       foreach($changed as $socket){
         if($socket==$this->master){
           $client=socket_accept($this->master);
